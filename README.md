@@ -69,6 +69,10 @@
   <img src="https://github.com/user-attachments/assets/7691e743-b0d8-4bcd-b054-af55e1c537c1" alt="3 인식내용 수정 후 저장">
 </p>
 
+#### 엑셀파일 저장
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/973ed37a-34d9-43ab-95aa-e7f7bd66633f" alt="7 엑셀 파일로 저장">
+</p>
 ---
 
 ## 추진 일정 경과
