@@ -60,7 +60,7 @@
 ![담당내용](https://github.com/user-attachments/assets/c69c615b-923b-4834-ae7f-d96571efa84d)
 
 #### 영수증 업로드
-![2 영수증 업로드](https://github.com/user-attachments/assets/c8513bda-3f8a-4627-a19d-0bc04205185b)
+<center>![2 영수증 업로드](https://github.com/user-attachments/assets/c8513bda-3f8a-4627-a19d-0bc04205185b)</center>
 #### 내용 수정 및 저장
 ![3 인식내용 수정 후 저장](https://github.com/user-attachments/assets/7691e743-b0d8-4bcd-b054-af55e1c537c1)
 ---
