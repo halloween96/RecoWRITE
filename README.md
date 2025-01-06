@@ -65,7 +65,10 @@
 </p>
 
 #### 내용 수정 및 저장
-![3 인식내용 수정 후 저장](https://github.com/user-attachments/assets/7691e743-b0d8-4bcd-b054-af55e1c537c1)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7691e743-b0d8-4bcd-b054-af55e1c537c1" alt="3 인식내용 수정 후 저장">
+</p>
+
 ---
 
 ## 추진 일정 경과
