@@ -1,0 +1,57 @@
+.home1{
+    animation: home1 1s ease-in-out forwards;
+}
+
+@keyframes home1 {
+    0%{
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.home2{
+    animation: home2 1s ease-in-out forwards;
+}
+
+@keyframes home2 {
+    0%{
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home3{
+    animation: home3 1s ease-in-out forwards;
+}
+
+@keyframes home3 {
+    0%{
+        opacity: 0;
+        transform: scale(0);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.home4{
+    animation: home4 1s ease-in-out forwards;
+}
+
+@keyframes home4 {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
