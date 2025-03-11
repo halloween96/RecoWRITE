@@ -6,6 +6,7 @@ import Pagination from 'react-js-pagination';
 import './Paginate.css';
 
 export default function Check() {
+    // 사용자 토큰 확인
     const Islogin = useRecoilValue(userToken);
 
     const [data, setData] = useState(null);
@@ -17,10 +18,12 @@ export default function Check() {
     const [filterData, setFilterData] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
 
+    // 사용자와 일치하는 데이터 확인
     useEffect(() => {
         fetchData();
     }, [Islogin, page]);
 
+    // 한 페이지에 10개의 데이터 표시
     useEffect(() => {
         if (data && data.content && data.content.content) {
             setFilterData(data.content.content);
@@ -30,6 +33,7 @@ export default function Check() {
         }
     }, [data]);
 
+    // 백엔드 서버에서 데이터 읽어오기
     const fetchData = async () => {
         try {
             const url = `http://10.125.121.183:8080/receipt?page=${page}`;
@@ -45,6 +49,7 @@ export default function Check() {
         }
     };
 
+    // 각종 검색 핸들
     const handlePageChange = (pageNumber) => {
         setPage(pageNumber);
     };
@@ -65,6 +70,7 @@ export default function Check() {
         setEndDate(event.target.value);
     };
 
+    // 검색 실행
     const handleSearch = () => {
         const filtered = data.content.content.filter(item => {
             const date = new Date(item.tradAt);
@@ -87,6 +93,7 @@ export default function Check() {
         setTotalPages(newTotalPages);
     };
 
+    // 검색시 enter 키 입력으로 실행행
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             handleSearch();

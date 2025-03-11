@@ -6,6 +6,7 @@ import { receiveData } from './atom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userToken } from './atom';
 
+// 파일 상태 관리
 const ImageUpload = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileName, setFileName] = useState('');
@@ -16,13 +17,16 @@ const ImageUpload = () => {
 
     const navigate = useNavigate();
 
+    // 파일 선택
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+        // 이미지 파일 확인
         if (file && file.type.startsWith('image/')) {
             setSelectedFile(file);
             setFileName(file.name);
             setFileAttach(true);
 
+            // 파일 미리보기 생성
             const fileReader = new FileReader();
             fileReader.onload = () => {
                 setPreveiewUrl(fileReader.result);
@@ -34,12 +38,15 @@ const ImageUpload = () => {
         }
     };
 
+    // 백 서버로 파일 업로드
     const handleUpload = async () => {
 
+        // 파일 유무 확인
         if (!selectedFile) {
             alert('영수증을 먼저 첨부해 주세요')
             return;
         }
+        // 로그인 유무 확인
         if (!token) {
             alert('로그인 후 사용가능 합니다');
             navigate("/");
@@ -48,8 +55,10 @@ const ImageUpload = () => {
         }
 
         const formData = new FormData();
+        // 파일 추가
         formData.append('file', selectedFile);
 
+        // 백 서버 응답동안 로딩 페이지로 이동
         try {
             navigate("/Loading");
             const response = await fetch('http://10.125.121.183:8080/image/upload', {
@@ -58,6 +67,7 @@ const ImageUpload = () => {
                 body: formData,
             });
 
+            // 서버 응답별 대응
             const data = await response.json();
             setReceiveData(data);
             navigate("/Print")
@@ -72,11 +82,13 @@ const ImageUpload = () => {
         }
     };
 
+    // 파일 선택창 열기기
     const fileInputRef = useRef();
     const handleFileButtonClick = () => {
         fileInputRef.current.click();
     };
 
+    // 드래그앤드랍 기능 추가
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
         if (file && file.type.startsWith('image/')) {
@@ -94,6 +106,7 @@ const ImageUpload = () => {
         }
     };
 
+    // 드래그앤드랍 영역 설정정
     const { getRootProps } = useDropzone({ onDrop });
 
     return (

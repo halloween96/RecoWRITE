@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router';
 import { useRecoilValue } from 'recoil';
 import { userToken } from './atom'
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx'; // 엑셀 다운로드 라이브러리
 
 export default function Detail() {
 
+    // 사용자 토큰 확인
     const Islogin = useRecoilValue(userToken);
     const navigate = useNavigate();
 
+    // 상세 데이터 기본값 설정
     const [detail, setDetail] = useState({ content: { itemList: [] } });
+    // 백에서 받은 영수증 ID 확인
     const { receiptId } = useParams();
 
+    // 영수증 상세 데이터 가져오기
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -29,10 +33,12 @@ export default function Detail() {
         fetchData();
     }, []);
 
+    // 단가, 수량으로 총액 계산
     const sumPrice = (unitPrice, quantity) => {
         return unitPrice * quantity;
     };
 
+    // 단가 숫자만 입력력
     const handlePriceChange = (index, event) => {
         const inputValue = event.target.value.replace(/[^0-9]/g, '');
         const newUnitPrice = parseInt(inputValue, 10) || 0;
@@ -47,6 +53,7 @@ export default function Detail() {
         });
     };
 
+    // 수량 숫자만 입력
     const handleQuantityChange = (index, event) => {
         const inputValue = event.target.value.replace(/[^0-9]/g, '');
         const newQuantity = parseInt(inputValue, 10) || 0;
@@ -61,10 +68,12 @@ export default function Detail() {
         });
     };
 
+    // 최종 계산
     const totalItems = detail.content.itemList.length;
     const totalQuantity = detail.content.itemList.reduce((total, item) => total + parseInt(item.quantity), 0);
     const totalPrice = detail.content.itemList.reduce((total, item) => total + item.price, 0);
 
+    // 수정된 데이터 백 서버로 저장
     const handlesave = async () => {
         const updateItemList = detail.content.itemList.map((item, index) => ({
             ...item,
@@ -99,6 +108,7 @@ export default function Detail() {
         }
     };
 
+    // 영수증 데이터 엑셀 다운로드
     const downloadExcel = () => {
 
         const ws = XLSX.utils.json_to_sheet(detail.content.itemList);
@@ -108,6 +118,7 @@ export default function Detail() {
         XLSX.writeFile(wb, "detail.xlsx");
     };
 
+    // 데이터 삭제
     const handledelete = async () => {
         if (window.confirm("영수증을 삭제 하시겠습니까?")) {
             const resp = await fetch(`http://10.125.121.183:8080/receipt/${receiptId}`, {
@@ -126,6 +137,7 @@ export default function Detail() {
     };
     console.log()
 
+    // 뒤로가기
     const handleBack = () => {
         navigate("/Check");
     }

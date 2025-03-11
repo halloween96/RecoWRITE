@@ -5,6 +5,7 @@ export const receiveData = atom({
     default: '',
 });
 
+// 사용자 토큰 정의
 export const userToken = atom({
     key: 'res.headers.get("authorization")',
     default: localStorage.getItem('token')

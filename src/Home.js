@@ -21,6 +21,7 @@ export default function Home() {
     };
 
 
+    // fullpage 관리
     let options = {
         anchors: ['One', 'Two', 'Three', 'Four', 'Five'],
     }

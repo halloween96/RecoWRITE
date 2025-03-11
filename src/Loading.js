@@ -1,4 +1,5 @@
 import React from 'react'
+// 로딩 애니메이션
 import Spinner from './assets/images/loading3.gif'
 
 export default function Loading() {

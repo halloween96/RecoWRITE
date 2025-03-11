@@ -9,6 +9,7 @@ export default function Print() {
     const [rd, setReceiveData] = useRecoilState(receiveData);
     const token = useRecoilValue(userToken);
     const updateRd = useUpdateRd();
+    // 선택된 행의 인덱스 관리
     const [selectedRowIndex, setSelectedRowIndex] = useState(null);
     console.log("receiveData : ", rd)
     const navigate = useNavigate();
@@ -38,6 +39,7 @@ export default function Print() {
         priceRefs.current[index] = element;
     };
 
+    // 입력 값으로 리스트 업데이트
     const handlesave = () => {
         const updatedItemList = rd.content.body.items.map((item, index) => ({
             ...item,
@@ -47,6 +49,7 @@ export default function Print() {
             price: priceRefs.current[index].value.replace(/,/g, '')
         }));
 
+        // Recoil 업데이트
         updateRd({
             ...rd,
             content: {
@@ -61,6 +64,7 @@ export default function Print() {
             }
         });
 
+        // 백 서버에 데이터 저장 요청
         fetch('http://10.125.121.183:8080/receipt/save', {
             method: 'POST',
             headers: {
@@ -90,10 +94,12 @@ export default function Print() {
         setSelectedRowIndex(index);
     };
 
+    // 행 추가
     const handleplus = () => {
         const newItem = { item: '', unitPrice: 0, quantity: 0, price: 0 };
 
         if (selectedRowIndex !== null) {
+            // 선택된 행의 다음 행 추가
             const updatedItems = [
                 ...rd.content.body.items.slice(0, selectedRowIndex + 1),
                 newItem,
@@ -111,6 +117,7 @@ export default function Print() {
                 }
             });
         } else {
+            // 미선택시 마지막 행 추가
             setReceiveData({
                 ...rd,
                 content: {
@@ -124,6 +131,7 @@ export default function Print() {
         }
     };
 
+    // 행 삭제
     const handledelete = () => {
         if (selectedRowIndex !== null) {
             const updatedItems = [...rd.content.body.items];
@@ -145,6 +153,7 @@ export default function Print() {
     };
 
     const numberInput = (e, index, type) => {
+        // 수자만 입력
         const value = e.target.value.replace(/[^\d]/g, '');
         e.target.value = value;
 
@@ -158,6 +167,7 @@ export default function Print() {
         }
     };
 
+    // 숫자를 천단위로 표시
     const formatNumber = (e) => {
         const value = e.target.value.replace(/[^\d]/g, '');
         if (!isNaN(value) && value !== '') {
@@ -165,6 +175,7 @@ export default function Print() {
         }
     }
 
+    // 총합 업데이트
     const updateSumRef = () => {
         let sum = 0;
         rd.content.body.items.forEach((item, index) => {
@@ -183,6 +194,7 @@ export default function Print() {
         updateSumRef();
     };
 
+    // 아이템 변경 시 총합 업데이트
     useEffect(() => {
         updateSumRef();
     }, [rd.content.body.items])

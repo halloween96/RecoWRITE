@@ -12,6 +12,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
 
     const [checkButtonClick, setCheckButtonClick] = useState(false);
 
+    // 이메일 중복 확인
     const checkEmailDuplication = (e) => {
         e.preventDefault();
         const email = emailRef.current.value;
@@ -44,9 +45,11 @@ const RegisterModal = ({ isOpen, onClose }) => {
         });
     };
 
+    // 회원가입
     const onSubmithandle = async (e) => {
         e.preventDefault();
 
+        // 입력 정보 가져오기
         const userData = {
             email: emailRef.current.value,
             password: passRef.current.value,

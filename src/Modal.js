@@ -14,6 +14,7 @@ const Modal = ({ isOpen, onClose }) => {
     const [modalClass, setModalClass] = useState('modal');
     const [showRegisterModal, setShowRegisterModal] = useState(false);
 
+    // 모달 닫기
     const closeModal = () => {
         setClosing(true);
         setModalClass('modal closing');
@@ -24,12 +25,14 @@ const Modal = ({ isOpen, onClose }) => {
         }, 1000);
     };
 
+    // 모달 열기 애니메이션
     useEffect(() => {
         if (isOpen) {
             setModalClass('modal open');
         }
     }, [isOpen]);
 
+    // 로그인 요청
     const onSubmithandle = async (e) => {
         e.preventDefault();
 
